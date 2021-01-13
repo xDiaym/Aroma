@@ -1,0 +1,12 @@
+{
+  "name": "Aroma",
+  "displayName": "Aroma",
+  "expo": {
+    "name": "Aroma",
+    "slug": "Aroma",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
