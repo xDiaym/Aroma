@@ -1,7 +1,10 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Progress from "./Progress";
 import Rate from "./Rate";
+
+const { width } = Dimensions.get("window");
+const MAX_TEXTLINE_WIDTH = width / 3.5;
 
 interface RatingProps {
   total: number;
@@ -16,55 +19,51 @@ interface LineProps {
   rate: number;
 }
 
-interface LinesProps {
-  data: LineProps[];
-}
-
-const Lines = ({ data }: LinesProps) => {
+const Line = ({ name, rate }: LineProps) => {
   return (
-    <View style={linesStyles.root}>
-      <View style={linesStyles.names}>
-        {data.map(({ name }, index) => <Text style={linesStyles.text} key={index}>{name}</Text>)}
-      </View>
-      {/* FIXME:  d*/}
-      <View style={{paddingLeft:32}}>
-        {data.map(({ rate }, index) => (
-          <View style={{ height: 24, justifyContent: "center" }}>
-            <Progress progress={rate / 10} key={index}/>
-          </View>
-        ))}
+    <View style={lineStyles.root}>
+      <Text style={lineStyles.text}>{name}</Text>
+      <View style={lineStyles.progress}>
+        <Progress progress={rate / 10} />
       </View>
     </View>
   );
 }
 
-const linesStyles = StyleSheet.create({
+const lineStyles = StyleSheet.create({
   root: {
     flexDirection: "row"
   },
-  names: {
-    flexDirection: "column",
-  },
   text: {
+    color: '#270D47',
+    flexDirection: "column",
+    fontFamily: "Rubik",
+    fontWeight: "400",
     fontSize: 14,
-    color: '#270D47'
+    width: MAX_TEXTLINE_WIDTH
+  },
+  progress: {
+    top: 10,
+    fontSize: 14,
   }
 });
 
-export default ({ aromas, total, directing, plot, entertainment }: RatingProps) => {
+export default ({ total, aromas, directing, plot, entertainment }: RatingProps) => {
   return (
-    <View style={{flexDirection: "row"}}>
+    <View style={{ flexDirection: "row" }}>
       <Rate rate={total} />
-      <Lines data={[
-          {name: 'Ароматы', rate: aromas},
-          {name: 'Режессура', rate: directing},
-          {name: 'Сюжет', rate: plot},
-          {name: 'Зрелищность', rate: entertainment},
-        ]}
-      />
+      <View style={ratingStyles.progresses}>
+        <Line name={"Aromas"} rate={aromas} />
+        <Line name={"Directing"} rate={directing} />
+        <Line name={"Plot"} rate={plot} />
+        <Line name={"Entertainment"} rate={entertainment} />
+      </View>
     </View>
   );
 }
 
 const ratingStyles = StyleSheet.create({
+  progresses: {
+    flexDirection: "column"
+  }
 });

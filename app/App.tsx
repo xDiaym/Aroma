@@ -1,6 +1,6 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
-import {ImageSourcePropType, StyleSheet, View} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { ImageSourcePropType, StyleSheet, View } from 'react-native';
 import Timer from "./components/Timer";
 import Animated, {
   block,
@@ -12,11 +12,11 @@ import Animated, {
   Value
 } from "react-native-reanimated";
 import FilmDescription from "./screens/FilmDescription";
-import {MeditationDescription} from "./screens/MeditationDescription";
+import { MeditationDescription } from "./screens/MeditationDescription";
 import Rating from "./components/Rating";
 import Card from "./components/Card";
 import Cards from "./screens/Cards";
-import {Button} from "./components/Button";
+import { Button } from "./components/Button";
 
 // @ts-ignore
 export function runTiming(clock, value, dest) {
@@ -51,46 +51,8 @@ export function runTiming(clock, value, dest) {
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style={'auto'}/>
-      <Cards
-        cards={[
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #1',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #2',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #3',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #4',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #5',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #6',
-            amount: 42
-          },
-          {
-            iconName: 'fruit-grapes-outline',
-            title: 'Aroma #7',
-            amount: 42
-          },
-        ]}
-      />
+      <StatusBar style={'auto'} />
+      <Rating total={10} aromas={8} directing={9} entertainment={7} plot={8} />
     </View>
   );
 }
