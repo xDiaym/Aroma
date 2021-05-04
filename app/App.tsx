@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { ImageSourcePropType, StyleSheet, View } from 'react-native';
+import { ImageSourcePropType, StyleSheet, ToastAndroid, View } from 'react-native';
 import Timer from "./components/Timer";
 import Animated, {
   block,
@@ -52,7 +52,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style={'auto'} />
-      <Rating total={10} aromas={8} directing={9} entertainment={7} plot={8} />
+      <FilmDescription
+        backgroundImage={require('./assets/images/forest.png')}
+        title={"Лесной болван"}
+        description={"Крутой фильм, просто нет слов"}
+        plot={"Жил был Форест, подолжение в фильме"}
+        screenshots={[]}
+        onClick={() => null}
+      />
     </View>
   );
 }

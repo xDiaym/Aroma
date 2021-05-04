@@ -1,4 +1,4 @@
-import Svg, {Line} from "react-native-svg";
+import Svg, { Line } from "react-native-svg";
 import React from "react";
 
 interface ProgressProps {

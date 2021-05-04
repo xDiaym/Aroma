@@ -2,9 +2,16 @@ import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Progress from "./Progress";
 import Rate from "./Rate";
+import "../common/styles";
+import defaultStyle from "../common/styles";
 
+// TODO: use defualt constants
 const { width } = Dimensions.get("window");
-const MAX_TEXTLINE_WIDTH = width / 3.5;
+const PADDING = 16;
+const CIRCLE_SIZE = 75;
+const LINE_WIDTH = (width - PADDING * 2) - CIRCLE_SIZE;
+const PROGRESS_LINE_WIDTH = LINE_WIDTH * 0.5;
+const TEXT_LINE_WIDTH = LINE_WIDTH * 0.4;
 
 interface RatingProps {
   total: number;
@@ -24,7 +31,7 @@ const Line = ({ name, rate }: LineProps) => {
     <View style={lineStyles.root}>
       <Text style={lineStyles.text}>{name}</Text>
       <View style={lineStyles.progress}>
-        <Progress progress={rate / 10} />
+        <Progress progress={rate / 10} width={PROGRESS_LINE_WIDTH} />
       </View>
     </View>
   );
@@ -32,7 +39,8 @@ const Line = ({ name, rate }: LineProps) => {
 
 const lineStyles = StyleSheet.create({
   root: {
-    flexDirection: "row"
+    flexDirection: "row",
+    ...defaultStyle.showBorders
   },
   text: {
     color: '#270D47',
@@ -40,18 +48,20 @@ const lineStyles = StyleSheet.create({
     fontFamily: "Rubik",
     fontWeight: "400",
     fontSize: 14,
-    width: MAX_TEXTLINE_WIDTH
+    width: TEXT_LINE_WIDTH,
   },
   progress: {
-    top: 10,
-    fontSize: 14,
+    justifyContent: "center",
   }
 });
 
 export default ({ total, aromas, directing, plot, entertainment }: RatingProps) => {
+  console.log(width)
   return (
-    <View style={{ flexDirection: "row" }}>
-      <Rate rate={total} />
+    <View style={ratingStyles.root}>
+      <View style={defaultStyle.showBorders}>
+        <Rate rate={total} />
+      </View>
       <View style={ratingStyles.progresses}>
         <Line name={"Aromas"} rate={aromas} />
         <Line name={"Directing"} rate={directing} />
@@ -63,7 +73,12 @@ export default ({ total, aromas, directing, plot, entertainment }: RatingProps) 
 }
 
 const ratingStyles = StyleSheet.create({
+  root: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
   progresses: {
-    flexDirection: "column"
+    paddingLeft: 21,
+    flexDirection: "column",
   }
 });

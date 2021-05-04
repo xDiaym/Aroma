@@ -1,7 +1,9 @@
 import React from "react";
-import {FlatList, Image, ImageSourcePropType, StyleSheet, Text, View} from "react-native";
-import {Button} from "../components/Button";
-import {AromaCircle, AromaCircleProps} from "../components/AromaCircle";
+import { FlatList, Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
+import { Button } from "../components/Button";
+import "../common/styles";
+import { AromaCircle, AromaCircleProps } from "../components/AromaCircle";
+import defaultStyle from "../common/styles";
 
 
 interface MeditationDescriptionProps {
@@ -23,7 +25,7 @@ export class MeditationDescription extends React.Component<MeditationDescription
         <View style={styles.content}>
           <Text style={styles.title}>{this.props.title}</Text>
           <Text style={styles.description}>{this.props.description}</Text>
-          <Button title={'Запустить'} onPress={this.props.onClick}/>
+          <Button title={'Запустить'} onPress={this.props.onClick} />
           <Text style={styles.subTitle}>Запахи</Text>
           <FlatList
             horizontal
@@ -61,22 +63,17 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontFamily: "Roboto-Regular",
+    ...defaultStyle.text,
     fontSize: 34,
-    fontWeight: "500",
-    color: '#270D47',
     paddingBottom: 15,
   },
   subTitle: {
-    fontFamily: "Roboto-Regular",
-    fontWeight: "500",
+    ...defaultStyle.text,
     fontSize: 26,
-    color: '#270D47'
   },
   description: {
-    fontFamily: "Roboto-Regular",
+    ...defaultStyle.text,
     marginBottom: 27,
-    color: '#270D47'
   }
 });
 

@@ -1,5 +1,5 @@
-import {FlatList, Image, ImageSourcePropType, StyleSheet, Text, View} from "react-native";
-import {Button} from "../components/Button";
+import { FlatList, Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
+import { Button } from "../components/Button";
 import React from "react";
 import Rating from "../components/Rating";
 import AgeRestrictBadge from "../components/AgeRestrictBadge";
@@ -28,7 +28,7 @@ export default ({ backgroundImage, title, description, onClick, plot }: FilmDesc
         <Text style={styles.regularText}>{description}</Text>
         {/* FIXME: move rating */}
         <Rating plot={10} total={3.2222} entertainment={10} directing={9} aromas={2} />
-        <Button title={'Тык!'} onPress={onClick}/>
+        <Button title={'Тык!'} onPress={onClick} />
         <Text style={styles.subTitle}>Сюжет</Text>
         <Text style={styles.regularText}>{plot}</Text>
       </View>

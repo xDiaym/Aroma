@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, {Circle, Path} from "react-native-svg";
+import Svg, { Circle, Path, Text } from "react-native-svg";
 
 const size = 75;
 const strokeWidth = 3;
@@ -22,7 +22,8 @@ interface CircularProgressProps {
 }
 
 
-export default ({progress}: CircularProgressProps) => {
+export default ({ progress }: CircularProgressProps) => {
+  /* I know that.is very bad code, but it work */
   const angle = progress * (endAngle - startAngle);
   return (
     <Svg width={size} height={size} strokeLinecap={"round"}>
@@ -34,7 +35,7 @@ export default ({progress}: CircularProgressProps) => {
       <Path
         stroke="#8B61DF"
         fill="none"
-        strokeDasharray={`${(angle) * r}, ${(2*PI - angle) * r}`}
+        strokeDasharray={`${(angle) * r}, ${(2 * PI - angle) * r}`}
         {...{ d, strokeWidth }}
       />
       <Circle
@@ -43,6 +44,16 @@ export default ({progress}: CircularProgressProps) => {
         fill={"#8B61DF"}
         r={circleRadius}
       />
+      <Text
+        fill="#000"
+        fontSize="26"
+        fontWeight="bold"
+        x={size / 2}
+        y={size * 0.55}
+        textAnchor="middle"
+      >
+        {progress.toFixed(1)}
+      </Text>
     </Svg>
   );
 };
