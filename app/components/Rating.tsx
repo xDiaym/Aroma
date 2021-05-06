@@ -1,9 +1,9 @@
 import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Progress from "./Progress";
-import Rate from "./Rate";
 import "../common/styles";
 import defaultStyle from "../common/styles";
+import SemiCircleRate from "./SemiCircleRate";
 
 // TODO: use defualt constants
 const { width } = Dimensions.get("window");
@@ -43,12 +43,9 @@ const lineStyles = StyleSheet.create({
     ...defaultStyle.showBorders
   },
   text: {
-    color: '#270D47',
     flexDirection: "column",
-    fontFamily: "Rubik",
-    fontWeight: "400",
-    fontSize: 14,
     width: TEXT_LINE_WIDTH,
+    ...defaultStyle.text,
   },
   progress: {
     justifyContent: "center",
@@ -60,7 +57,7 @@ export default ({ total, aromas, directing, plot, entertainment }: RatingProps) 
   return (
     <View style={ratingStyles.root}>
       <View style={defaultStyle.showBorders}>
-        <Rate rate={total} />
+        <SemiCircleRate progress={total / 10} />
       </View>
       <View style={ratingStyles.progresses}>
         <Line name={"Aromas"} rate={aromas} />

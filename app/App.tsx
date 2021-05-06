@@ -4,7 +4,7 @@ import { ImageSourcePropType, StyleSheet, ToastAndroid, View } from 'react-nativ
 import Timer from "./components/Timer";
 import Animated, {
   block,
-  Clock, clockRunning, cond, debug,
+  Clock, clockRunning, color, cond, debug,
   Easing,
   set, startClock, stopClock,
   timing,
@@ -12,11 +12,12 @@ import Animated, {
   Value
 } from "react-native-reanimated";
 import FilmDescription from "./screens/FilmDescription";
-import { MeditationDescription } from "./screens/MeditationDescription";
-import Rating from "./components/Rating";
-import Card from "./components/Card";
-import Cards from "./screens/Cards";
-import { Button } from "./components/Button";
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { NavigationContainer } from '@react-navigation/native';
+import colors from './common/colors';
 
 // @ts-ignore
 export function runTiming(clock, value, dest) {
@@ -48,7 +49,7 @@ export function runTiming(clock, value, dest) {
   ]);
 }
 
-export default function App() {
+const F = () => {
   return (
     <View style={styles.container}>
       <StatusBar style={'auto'} />
@@ -56,11 +57,55 @@ export default function App() {
         backgroundImage={require('./assets/images/forest.png')}
         title={"Лесной болван"}
         description={"Крутой фильм, просто нет слов"}
-        plot={"Жил был Форест, подолжение в фильме"}
-        screenshots={[]}
+        plot={"Жил был Форест, подолжение в фильме!"}
+        screenshots={[require('./assets/images/image15.png')]}
         onClick={() => null}
       />
     </View>
+  );
+}
+
+const Tab = createMaterialBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        activeColor={colors.purple}
+        inactiveColor={colors.incative}
+        labeled={false}
+        barStyle={{ backgroundColor: '#fff' }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={F}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Analytics"
+          component={View}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialIcon name="bar-chart" color={color} size={26} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={View}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="ios-settings-outline" color={color} size={26} />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

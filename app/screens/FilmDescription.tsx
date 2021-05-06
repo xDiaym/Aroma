@@ -13,7 +13,21 @@ interface FilmDescriptionProps {
   screenshots: ImageSourcePropType[];
 }
 
-export default ({ backgroundImage, title, description, onClick, plot }: FilmDescriptionProps) => {
+const renderScreenshot = (url: ImageSourcePropType) => {
+  return (
+    <View style={screenshotStyles.root}>
+      <Image source={url} style={screenshotStyles.root} />
+    </View>
+  );
+}
+
+const screenshotStyles = StyleSheet.create({
+  root: {
+    borderRadius: 5
+  }
+})
+
+export default ({ backgroundImage, title, description, onClick, plot, screenshots }: FilmDescriptionProps) => {
   return (
     <View style={styles.root}>
       <Image
@@ -31,6 +45,12 @@ export default ({ backgroundImage, title, description, onClick, plot }: FilmDesc
         <Button title={'Тык!'} onPress={onClick} />
         <Text style={styles.subTitle}>Сюжет</Text>
         <Text style={styles.regularText}>{plot}</Text>
+        <FlatList
+          data={screenshots}
+          renderItem={({ item }) => renderScreenshot(item)}
+          keyExtractor={(item, index) => index.toString()}
+        >
+        </FlatList>
       </View>
     </View>
   );
