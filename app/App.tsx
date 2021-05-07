@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { ImageSourcePropType, StyleSheet, ToastAndroid, View } from 'react-native';
+import { ImageSourcePropType, StyleSheet, Text, ToastAndroid, View } from 'react-native';
 import Timer from "./components/Timer";
 import Animated, {
   block,
@@ -18,6 +18,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
 import colors from './common/colors';
+import ScrollBar from './components/ScrollBar';
 
 // @ts-ignore
 export function runTiming(clock, value, dest) {
@@ -65,6 +66,22 @@ const F = () => {
   );
 }
 
+const Settings = () => {
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column"
+      }}
+    >
+      <ScrollBar />
+    </View>
+  );
+}
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
@@ -75,7 +92,7 @@ export default function App() {
         activeColor={colors.purple}
         inactiveColor={colors.incative}
         labeled={false}
-        barStyle={{ backgroundColor: '#fff' }}
+        barStyle={{ backgroundColor: '#ffffff' }}
       >
         <Tab.Screen
           name="Home"
@@ -97,7 +114,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Settings"
-          component={View}
+          component={Settings}
           options={{
             tabBarIcon: ({ color }) => (
               <Ionicons name="ios-settings-outline" color={color} size={26} />
